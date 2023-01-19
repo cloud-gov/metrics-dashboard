@@ -7,6 +7,7 @@ import re
 import datetime
 import json
 import getopt
+from bisect import bisect
 
 # Get the command-line arguments, excluding the script name
 alb_domain_file = cdn_domain_file = date = False
@@ -48,19 +49,23 @@ def fail(message):
 
 def usa_total(after,before):
     visits_by_date = {}
+    visits_list = []
     route = "reports/second-level-domain/data"
     payload = { 'api_key': api_key, 'after': after, 'before': before }
     api_url = api_root + "/" + route
     response = requests.get(api_url, params=payload)
     for item in response.json():
-#        print(item)
-        current_value = visits_by_date.get(item['date'])
+        visits = item['visits']
+        date = item['date']
+        current_value = visits_by_date.get(date)
         if current_value:
-            visits_by_date[item['date']] += item['visits'] 
+            visits_by_date[date]['total_visits'] += visits
         else:
-            visits_by_date[item['date']] = item['visits'] 
-#        print(f'date: {item["date"]}, total_visits: {visits_by_date[item["date"]]}')
-    print("USA visits counted", file=sys.stderr)
+            visits_by_date[date] = {}
+            visits_by_date[date]['total_visits'] = visits
+            visits_by_date[date]['rank'] = []
+        visits_by_date[date]['rank'].append(visits)
+    print("... Status ... USA visits counted", file=sys.stderr)
     return visits_by_date
 
 def domains_total(domains,after, before):
@@ -69,21 +74,18 @@ def domains_total(domains,after, before):
     nd = 0
     for d in domains:
         nd += 1
-        print(f'... {nd} domains processed...') if nd % 20
-        else:
-            route = f'domain/{d}/reports/domain/data'
-            payload = { 'api_key': api_key, 'after': after, 'before': before }
-            api_url = api_root + "/" + route
-#            print(f'api_url: {api_url}')
-            response = requests.get(api_url, params=payload)
-            for item in response.json():
-                if item['report_agency']:
-                    current_value = visits_by_date.get(item['date'])
-                    if current_value:
-                        visits_by_date[item['date']] += item['visits'] 
-                    else:
-                        visits_by_date[item['date']] = item['visits'] 
-#                    print(f'date: {item["date"]}, total_visits: {visits_by_date[item["date"]]}')
+        if (nd % 20) == 0 : print(f'... {nd} domains processed...') 
+        route = f'domain/{d}/reports/domain/data'
+        payload = { 'api_key': api_key, 'after': after, 'before': before }
+        api_url = api_root + "/" + route
+        response = requests.get(api_url, params=payload)
+        for item in response.json():
+            if item['report_agency']:
+                current_value = visits_by_date.get(item['date'])
+                if current_value:
+                    visits_by_date[item['date']] += item['visits'] 
+                else:
+                    visits_by_date[item['date']] = item['visits'] 
 
     return visits_by_date 
 
@@ -112,7 +114,12 @@ usa_visits = usa_total(after,before)
 cdn_visits = domains_total(cdn_domains, after, before)
 print(f'-- Report starting from {date} --') 
 for date_key in cdn_visits.keys():
-   print("CDN visits for ", date_key, " -- (visits | percent): ", cdn_visits[date_key], " | ", '{:.1%}'.format(cdn_visits[date_key]/usa_visits[date_key]))
+    visits = cdn_visits[date_key]
+    print("CDN visits for ", date_key, " -- (visits | percent | rank ): ", 
+      visits, " | ", 
+      '{:.1%}'.format(visits/usa_visits[date_key]['total_visits']), " | ",
+      bisect(usa_visits[date_key]['rank'].reverse(), visits)
+    )
 
 
 #cloud_visits = alb_visits + cdn_visits

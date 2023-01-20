@@ -74,7 +74,7 @@ def domains_total(domains,after, before):
     nd = 0
     for d in domains:
         nd += 1
-        if (nd % 20) == 0 : print(f'... {nd} domains processed...') 
+        if (nd % 20) == 0 : print(f'... {nd} domains of {len(domains)} processed...') 
         route = f'domain/{d}/reports/domain/data'
         payload = { 'api_key': api_key, 'after': after, 'before': before }
         api_url = api_root + "/" + route
@@ -108,6 +108,8 @@ api_root="https://api.gsa.gov/analytics/dap/v1.1"
 
 usa_visits = usa_total(after,before)
 
+
+
 #alb_visits = domains_total(alb_domains, after, before)
 #print("ALB visits (visits | percent): ", alb_visits, " | ", '{:.1%}'.format(alb_visits/usa_visits))
 
@@ -115,10 +117,12 @@ cdn_visits = domains_total(cdn_domains, after, before)
 print(f'-- Report starting from {date} --') 
 for date_key in cdn_visits.keys():
     visits = cdn_visits[date_key]
+    ranked_visits = usa_visits[date_key]['rank']
+    ranked_visits.reverse()
     print("CDN visits for ", date_key, " -- (visits | percent | rank ): ", 
       visits, " | ", 
       '{:.1%}'.format(visits/usa_visits[date_key]['total_visits']), " | ",
-      bisect(usa_visits[date_key]['rank'].reverse(), visits)
+      len(ranked_visits) - bisect(ranked_visits, visits)
     )
 
 

@@ -1,5 +1,4 @@
 const fs = require('fs');
-const path = require('path');
 const Mustache = require('mustache');
 
 const staticData = require('./static.json');

@@ -7,6 +7,7 @@ BLOCKED_REQS=$("$SCRIPT_DIR"/get-waf-requests-count.sh blocked)
 TOTAL_SANDBOXES=$("$SCRIPT_DIR"/get-sandboxes-count.sh)
 TOTAL_USERS=$("$SCRIPT_DIR"/get-users-count.sh)
 TOTAL_APPS=$("$SCRIPT_DIR"/get-apps-count.sh)
+# Get domains from external-domain-broker and old cdn-broker and custom-domain-broker
 TOTAL_DOMAIN_INSTANCES=$("$SCRIPT_DIR"/get-service-offering-instance-count.sh external-domain,cdn-route,custom-domain)
 TOTAL_DATABASE_INSTANCES=$("$SCRIPT_DIR"/get-service-offering-instance-count.sh aws-rds)
 TOTAL_ES_INSTANCES=$("$SCRIPT_DIR"/get-service-offering-instance-count.sh aws-elasticsearch)

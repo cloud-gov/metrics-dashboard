@@ -10,4 +10,4 @@ inputs:
 - name: src
 
 run:
-  path: src/scripts/generate-html.sh
+  path: src/ci/generate-html.sh

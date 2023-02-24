@@ -1,11 +1,12 @@
 {
-    "agencies_with_agreement": 134,
-    "total_apps": 1503,
-    "total_sandbox_orgs": 136,
-    "total_users": 3615,
-    "total_domain_instances": 235,
-    "total_database_instances": 393,
-    "total_bucket_instances": 1120,
-    "total_es_instances": 51,
-    "total_redis_instances": 108
+  "allowed_reqs": 55052199,
+  "blocked_reqs": 1560874,
+  "total_sandbox_orgs": 139,
+  "total_users": 3763,
+  "total_apps": 1616,
+  "total_domain_instances": 403,
+  "total_database_instances": 427,
+  "total_es_instances": 58,
+  "total_redis_instances": 106,
+  "total_s3_instances": 910
 }

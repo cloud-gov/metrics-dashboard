@@ -8,6 +8,11 @@ TOTAL_SANDBOXES=$("$SCRIPT_DIR"/get-sandboxes-count.sh)
 TOTAL_USERS=$("$SCRIPT_DIR"/get-users-count.sh)
 TOTAL_APPS=$("$SCRIPT_DIR"/get-apps-count.sh)
 TOTAL_DOMAIN_INSTANCES=$("$SCRIPT_DIR"/get-service-offering-instance-count.sh external-domain,cdn-route,custom-domain)
+TOTAL_DATABASE_INSTANCES=$("$SCRIPT_DIR"/get-service-offering-instance-count.sh aws-rds)
+TOTAL_ES_INSTANCES=$("$SCRIPT_DIR"/get-service-offering-instance-count.sh aws-elasticsearch)
+TOTAL_REDIS_INSTANCES=$("$SCRIPT_DIR"/get-service-offering-instance-count.sh aws-elasticache-redis)
+# Platform and Pages S3 service instances
+TOTAL_S3_INSTANCES=$("$SCRIPT_DIR"/get-service-offering-instance-count.sh s3,federalist-s3)
 
 jq -nr \
   --argjson allowed_reqs "$ALLOWED_REQS" \
@@ -16,4 +21,8 @@ jq -nr \
   --argjson total_users "$TOTAL_USERS" \
   --argjson total_apps "$TOTAL_APPS" \
   --argjson total_domain_instances "$TOTAL_DOMAIN_INSTANCES" \
-  '$ARGS.named' > "$SCRIPT_DIR/../src/data2.json"
+  --argjson total_database_instances "$TOTAL_DATABASE_INSTANCES" \
+  --argjson total_es_instances "$TOTAL_ES_INSTANCES" \
+  --argjson total_redis_instances "$TOTAL_REDIS_INSTANCES" \
+  --argjson total_s3_instances "$TOTAL_S3_INSTANCES" \
+  '$ARGS.named' > "$SCRIPT_DIR/../src/data.json"

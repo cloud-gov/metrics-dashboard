@@ -11,4 +11,5 @@ inputs:
 - name: src
 
 run:
-  path: src/ci/generate-html.sh
+  dir: src
+  path: ci/generate-html.sh

@@ -14,8 +14,8 @@ resources:
   type: git
   source:
     commit_verification_keys: ((cloud-gov-pgp-keys))
-    uri: ((dashboard-src-uri))
-    branch: ((dashboard-src-branch))
+    uri: ((dashboard-git-url))
+    branch: ((dashboard-git-branch))
 
 - name: cf-prod
   type: cf

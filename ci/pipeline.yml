@@ -27,6 +27,11 @@ resources:
     organization: ((dashboard-organization))
     space: ((dashboard-space))
 
+- name: daily-redeploy
+  type: time
+  source:
+    days: [Monday, Tuesday, Wednesday, Thursday, Friday]
+
 jobs:
 - name: reconfigure
   serial: true
@@ -41,10 +46,13 @@ jobs:
 
 - name: deploy-prod
   plan:
-  - get: src
-    params: {depth: 1}
-    trigger: true
-    passed: [reconfigure]
+  - in_parallel:
+    - get: daily-redeploy-timer
+      trigger: true
+    - get: src
+      params: {depth: 1}
+      trigger: true
+      passed: [reconfigure]
   - task: generate-data
     file: src/ci/generate-data.yml
     tags: [iaas]

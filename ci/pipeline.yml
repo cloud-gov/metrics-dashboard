@@ -53,6 +53,8 @@ jobs:
       CF_API_URL: ((prod-cf-api-url))
       CF_API_USER: ((prod-cf-broker-user.username))
       CF_API_PASSWORD: ((prod-cf-broker-user.password))
+      CF_ORG: ((dashboard-organization))
+      CF_SPACE: ((dashboard-space))
   - task: generate-html
     file: src/ci/generate-html.yml
   - put: cf-prod

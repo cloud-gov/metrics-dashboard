@@ -1,6 +1,10 @@
 #!/bin/bash
 
-cf login -a "$CF_API_URL" -u "$CF_API_USER" -p "$CF_API_PASSWORD"
+cf login -a "$CF_API_URL" \
+  -u "$CF_API_USER" \
+  -p "$CF_API_PASSWORD" \
+  -o "$CF_ORG" \
+  -s "$CF_SPACE"
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 

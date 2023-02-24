@@ -48,6 +48,8 @@ jobs:
   - task: generate-data
     file: src/ci/generate-data.yml
     tags: [iaas]
+    params:
+      AWS_DEFAULT_REGION: ((aws-region))
   - task: generate-html
     file: src/ci/generate-html.yml
   - put: cf-prod

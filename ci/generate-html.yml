@@ -9,6 +9,7 @@ image_resource:
 
 inputs:
 - name: data
+- name: src
 
 run:
   dir: src

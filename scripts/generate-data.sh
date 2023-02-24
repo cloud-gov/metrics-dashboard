@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cf login -a "$CF_API_URL" -u "$CF_API_USER" -p "$CF_API_PASSWORD"
+
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 ALLOWED_REQS=$("$SCRIPT_DIR"/get-waf-requests-count.sh allowed)

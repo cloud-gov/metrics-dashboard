@@ -27,7 +27,7 @@ resources:
     organization: ((dashboard-organization))
     space: ((dashboard-space))
 
-- name: daily-redeploy
+- name: daily-redeploy-timer
   type: time
   source:
     days: [Monday, Tuesday, Wednesday, Thursday, Friday]

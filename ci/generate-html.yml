@@ -8,7 +8,7 @@ image_resource:
     tag: 16
 
 inputs:
-- name: src
+- name: data
 
 run:
   dir: src

@@ -9,5 +9,9 @@ image_resource:
 inputs:
 - name: src
 
+outputs:
+- name: data
+  dir: src/src
+
 run:
   path: src/scripts/generate-data.sh

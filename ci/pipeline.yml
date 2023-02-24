@@ -1,36 +1,3 @@
-
-jobs:
-- name: reconfigure
-  serial: true
-  plan:
-  - get: src
-    params: {depth: 1}
-    trigger: true
-  - set_pipeline: ((name))
-    file: src/ci/pipeline.yml
-
-- name: deploy-prod
-  plan:
-  - in_parallel:
-    - get: src
-      params: {depth: 1}
-      trigger: true
-      passed: [reconfigure]
-  - task: generate-data
-    file: src/ci/generate-data.yml
-    tags: [iaas]
-  - task: generate-html
-    run:
-      dir: src
-      args:
-        - npm run generate-html
-  - put: cf-prod
-    params:
-      path: src
-      manifest: src/manifest.yml
-      show_app_log: true
-
----
 resource_types:
 - name: slack-notification
   type: docker-image
@@ -59,3 +26,30 @@ resources:
     password: ((prod-cf-password))
     organization: ((dashboard-organization))
     space: ((dashboard-space))
+
+jobs:
+- name: reconfigure
+  serial: true
+  plan:
+  - get: src
+    params: {depth: 1}
+    trigger: true
+  - set_pipeline: ((name))
+    file: src/ci/pipeline.yml
+
+- name: deploy-prod
+  plan:
+  - get: src
+    params: {depth: 1}
+    trigger: true
+    passed: [reconfigure]
+  - task: generate-data
+    file: src/ci/generate-data.yml
+    tags: [iaas]
+  - task: generate-html
+    file: src/ci/generate-html.yml
+  - put: cf-prod
+    params:
+      path: src
+      manifest: src/manifest.yml
+      show_app_log: true

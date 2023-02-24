@@ -1,9 +1,9 @@
 {
     "agencies_with_agreement": 134,
-    "deployed_apps_prod": 1503,
+    "total_apps": 1503,
     "total_sandbox_orgs": 136,
     "total_users": 3615,
-    "total_domains": 235,
+    "total_domain_instances": 235,
     "total_database_instances": 393,
     "total_bucket_instances": 1120,
     "total_es_instances": 51,

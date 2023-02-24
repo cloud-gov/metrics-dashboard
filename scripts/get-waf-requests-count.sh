@@ -20,7 +20,13 @@ esac
 
 DATE_FORMAT="+%Y-%m-%dT%H:00:00"
 
-START_DATE=$(date -u -v -1d "$DATE_FORMAT")
+UNAME=$(uname)
+if [[ "$UNAME" == "Linux" ]]; then
+    START_DATE=$(date -u -d "1 day ago" "$DATE_FORMAT")
+else
+    START_DATE=$(date -u -v -1d "$DATE_FORMAT")
+fi
+
 END_DATE=$(date -u "$DATE_FORMAT")
 PERIOD=3600 # aggregate request count by the hour (3600 seconds)
 

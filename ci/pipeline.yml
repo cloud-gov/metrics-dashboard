@@ -22,8 +22,8 @@ resources:
   icon: cloud-upload
   source:
     api: ((prod-cf-api-url))
-    username: ((prod-cf-username))
-    password: ((prod-cf-password))
+    username: ((prod-cf-broker-user.username))
+    password: ((prod-cf-broker-user.password))
     organization: ((dashboard-organization))
     space: ((dashboard-space))
 

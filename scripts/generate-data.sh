@@ -21,7 +21,7 @@ TOTAL_REDIS_INSTANCES=$("$SCRIPT_DIR"/get-service-offering-instance-count.sh aws
 # Platform and Pages S3 service instances
 TOTAL_S3_INSTANCES=$("$SCRIPT_DIR"/get-service-offering-instance-count.sh s3,federalist-s3)
 
-jq -nr \
+jq -n -r \
   --argjson allowed_reqs "$ALLOWED_REQS" \
   --argjson blocked_reqs "$BLOCKED_REQS" \
   --argjson total_sandbox_orgs "$TOTAL_SANDBOXES" \

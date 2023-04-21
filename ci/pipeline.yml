@@ -66,6 +66,8 @@ jobs:
   - task: generate-html
     file: src/ci/generate-html.yml
   - put: cf-prod
+    inputs:
+      - name: src
     params:
       path: src
       manifest: src/manifest.yml

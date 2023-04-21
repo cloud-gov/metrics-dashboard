@@ -67,6 +67,5 @@ jobs:
     file: src/ci/generate-html.yml
   - put: cf-prod
     params:
-      path: src
       manifest: src/manifest.yml
       show_app_log: true

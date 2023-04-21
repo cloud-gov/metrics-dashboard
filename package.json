@@ -1,7 +1,7 @@
 {
-  "name": "cloud-gov-dashboard",
+  "name": "cloud-gov-metrics-dashboard",
   "version": "1.0.0",
-  "description": "Dashboard for cloud.gov",
+  "description": "Metrics dashboard for cloud.gov",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

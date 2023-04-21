@@ -1,10 +1,13 @@
 #!/bin/bash
 
-cf login -a "$CF_API_URL" \
-  -u "$CF_API_USER" \
-  -p "$CF_API_PASSWORD" \
-  -o "$CF_ORG" \
-  -s "$CF_SPACE"
+cf target > /dev/null
+if [ $? -eq 1 ]; then
+  cf login -a "$CF_API_URL" \
+    -u "$CF_API_USER" \
+    -p "$CF_API_PASSWORD" \
+    -o "$CF_ORG" \
+    -s "$CF_SPACE"
+fi
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
@@ -20,6 +23,7 @@ TOTAL_ES_INSTANCES=$("$SCRIPT_DIR"/get-service-offering-instance-count.sh aws-el
 TOTAL_REDIS_INSTANCES=$("$SCRIPT_DIR"/get-service-offering-instance-count.sh aws-elasticache-redis)
 # Platform and Pages S3 service instances
 TOTAL_S3_INSTANCES=$("$SCRIPT_DIR"/get-service-offering-instance-count.sh s3,federalist-s3)
+agencies_with_agreement=$("$SCRIPT_DIR"/get-agency-customers-count.sh)
 
 jq -n -r \
   --argjson allowed_reqs "$ALLOWED_REQS" \
@@ -32,4 +36,5 @@ jq -n -r \
   --argjson total_es_instances "$TOTAL_ES_INSTANCES" \
   --argjson total_redis_instances "$TOTAL_REDIS_INSTANCES" \
   --argjson total_s3_instances "$TOTAL_S3_INSTANCES" \
+  --argjson agencies_with_agreement "$agencies_with_agreement" \
   '$ARGS.named' > "$SCRIPT_DIR/../src/data.json"

@@ -22,7 +22,7 @@ def show_cert_cn(cert, upload_cutoff):
         full_cert = iam.get_server_certificate(ServerCertificateName=cert['ServerCertificateName'])
         cert_body=full_cert['ServerCertificate']['CertificateBody']
         x509_cert = x509.load_pem_x509_certificate(cert_body.encode('utf-8'))
-        if x509_cert.not_valid_after > datetime.datetime.now():
+        if x509_cert.not_valid_after_utc > datetime.datetime.now(datetime.timezone.utc):
             domain_name = re.match(rf'<Name\(CN=(.*)\)\>', str(x509_cert.subject))
             if domain_name:
                 return domain_name.group(1)
@@ -34,7 +34,7 @@ if not os.environ.get('AWS_REGION')=='us-gov-west-1':
 iam = boto3.client('iam')
 paginator = iam.get_paginator('list_server_certificates')
 
-# Iterate over all the production ALB paths, get their certs, and pull out the 
+# Iterate over all the production ALB paths, get their certs, and pull out the
 # currently valid domains
 alb_domains = []
 ninety_days_ago = datetime.datetime.now() - datetime.timedelta(days=91)

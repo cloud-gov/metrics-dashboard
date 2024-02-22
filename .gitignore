@@ -3,3 +3,4 @@ src/assets/css
 src/index.html
 .DS_Store
 src/data*.json
+venv

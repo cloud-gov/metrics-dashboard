@@ -15,5 +15,8 @@
   },
   "devDependencies": {
     "@uswds/compile": "^1.1.0"
+  },
+  "overrides": {
+    "braces@<3.0.3": "3.0.3"
   }
 }

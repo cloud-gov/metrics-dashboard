@@ -5,4 +5,4 @@ applications:
   buildpacks:
   - staticfile_buildpack
   random-route: true
-  path: src 
+  path: src

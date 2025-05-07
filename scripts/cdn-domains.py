@@ -1,6 +1,7 @@
 #! /usr/bin/env python3
 
 import os
+import sys
 import boto3
 import json
 
@@ -13,9 +14,13 @@ if not os.environ.get('AWS_REGION')=='us-east-1':
 
 cdn_domains = []
 cdn = boto3.client('cloudfront')
-cdn_response = cdn.list_distributions()
-for i in cdn_response['DistributionList']['Items']:
-        aliases = i['Aliases']['Items']
-        cdn_domains = cdn_domains + aliases
+paginator = cdn.get_paginator('list_distributions')
+page_iterator = paginator.paginate()
+for page in page_iterator:
+     if "DistributionList" in page:
+        for i in page['DistributionList']['Items']:
+            if i["Aliases"]["Quantity"] > 0: 
+                aliases = i['Aliases']['Items']
+                cdn_domains = cdn_domains + aliases
 
 print(json.dumps(cdn_domains))

@@ -4,5 +4,5 @@ applications:
   instances: 1
   buildpacks:
   - staticfile_buildpack
-  random-route: true
+  random-route: false
   path: src

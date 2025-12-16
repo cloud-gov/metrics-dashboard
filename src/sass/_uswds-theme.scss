@@ -2,14 +2,30 @@
 ----------------------------------------
 USWDS with settings overrides
 ----------------------------------------
-Uncomment the following lines and add a list of changed settings
-in the form $setting: value,
+Canonical place for USWDS theme settings.
+
+Keep overrides minimal and token-based.
 ----------------------------------------
 */
 
-//
-//  @use "uswds-core" with (
-//    $setting: value,
-//    $setting: value
-//  );
-//
+@use "uswds-core" with (
+  // Keep CI logs quiet (USWDS release-note spam is not actionable per-build)
+  $theme-show-notifications: false,
+
+  // Brand tone: strong cloud.gov blue accents (token-based)
+  $theme-color-primary: "blue-60v",
+  $theme-color-primary-dark: "blue-70v",
+  $theme-color-primary-darker: "blue-80v",
+
+  // Links coherent with primary
+  $theme-link-color: "blue-60v",
+  $theme-link-hover-color: "blue-70v",
+
+  // Backgrounds / neutrals
+  $theme-color-base-lightest: "gray-5",
+  $theme-color-base-lighter: "gray-10",
+  $theme-color-base-light: "gray-20",
+
+  // Typography: cloud.gov vibe is modern sans, strong weight
+  $theme-font-type-sans: "public-sans"
+);

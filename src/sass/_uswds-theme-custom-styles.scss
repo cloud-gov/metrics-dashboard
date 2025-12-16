@@ -1,42 +1,134 @@
 /*
-* * * * * ==============================
-* * * * * ==============================
-* * * * * ==============================
-* * * * * ==============================
-========================================
-========================================
-========================================
 ----------------------------------------
-USWDS THEME CUSTOM STYLES
+USWDS THEME CUSTOM STYLES (Dashboard)
 ----------------------------------------
-!! Copy this file to your project's
-   sass root. Don't edit the version
-   in node_modules.
-----------------------------------------
-Custom project SASS goes here.
-
-i.e.
-@include u-padding-right('05');
+Goal: visually align with cloud.gov homepage style:
+- big bold hero typography
+- lots of white space
+- strong blue band section break
+- clean cards with subtle depth
 ----------------------------------------
 */
 
 @use "uswds-core" as *;
 
-
-.impact-summary__header {
-   font-size: 1.5rem;
+/* Page-level tone: more cloud.gov (white background, crisp text) */
+.cg-dashboard {
+  background-color: color("white");
+  color: color("ink");
 }
 
-.cloud-summary-block {
-   align-items: center;
+/* HERO */
+.cg-hero {
+  padding-top: units(6);
+  padding-bottom: units(5);
 }
 
-.cloud-summary-block__number {
-   font-size: 5rem;
-   // figure out how to get this from a variable
-   margin-right: 1.5rem;
+.cg-hero__title {
+  @include u-font("sans", "3xl");
+  font-weight: font-weight("bold");
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin: 0 0 units(2) 0;
 }
 
-.cloud-summary-block__body p:last-child {
-   margin-bottom: 0;
+.cg-hero__lede {
+  @include u-font("sans", "lg");
+  @include u-text("base-dark");
+  line-height: 1.6;
+  margin: 0;
+  max-width: 62ch;
+}
+
+.cg-dashboard__updated {
+  @include u-font("sans", "xs");
+  @include u-text("base-dark");
+  margin-top: units(2);
+}
+
+/* Blue band section (matches the homepage vibe) */
+.cg-band {
+  background-color: color("primary");
+  color: color("white");
+  padding-top: units(6);
+  padding-bottom: units(6);
+  margin-top: units(4);
+  margin-bottom: units(4);
+}
+
+.cg-band__title {
+  @include u-font("sans", "2xl");
+  font-weight: font-weight("bold");
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin: 0 0 units(2) 0;
+}
+
+.cg-band__lede {
+  @include u-font("sans", "md");
+  line-height: 1.6;
+  margin: 0;
+  max-width: 70ch;
+}
+
+/* Section headings */
+.cg-section-title {
+  @include u-font("sans", "xl");
+  font-weight: font-weight("bold");
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  margin-top: units(4);
+  margin-bottom: units(2);
+}
+
+/* Metric card styling */
+.cg-metric__label {
+  @include u-font("sans", "sm");
+  @include u-text("base-dark");
+  line-height: 1.2;
+}
+
+.cg-metric__value {
+  @include u-font("sans", "2xl");
+  @include u-text("ink");
+  font-weight: font-weight("bold");
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+/* Cards: clean, subtle depth, more “product” */
+.usa-card__container {
+  background: color("white");
+  border: 1px solid color("base-lighter");
+  border-radius: radius("lg");
+  box-shadow: 0 6px 18px rgb(0 0 0 / 6%);
+}
+
+.usa-card__header {
+  border-bottom: 1px solid color("base-lighter");
+}
+
+.usa-card__header .cg-metric__label {
+  @include u-text("ink");
+}
+
+/* Make the card group breathe more like cloud.gov homepage tiles */
+.usa-card-group {
+  margin-top: units(1);
+}
+
+/* Mobile polish */
+@include at-media-max("mobile-lg") {
+  .cg-hero {
+    padding-top: units(4);
+    padding-bottom: units(4);
+  }
+
+  .cg-hero__title {
+    @include u-font("sans", "2xl");
+  }
+
+  .cg-metric__value {
+    @include u-font("sans", "xl");
+  }
 }

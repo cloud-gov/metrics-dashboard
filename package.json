@@ -1,14 +1,17 @@
 {
   "name": "cloud-gov-metrics-dashboard",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Metrics dashboard for cloud.gov",
   "main": "index.js",
   "scripts": {
+    "build:css": "gulp compile",
+    "build:html": "node src/generate-html.js",
+    "build": "npm run build:css && npm run build:html",
     "test": "echo \"Error: no test specified\" && exit 1",
     "generate-html": "node src/generate-html.js"
   },
   "author": "",
-  "license": "ISC",
+  "license": "CC0-1.0",
   "dependencies": {
     "@uswds/uswds": "^3.3.0",
     "mustache": "^4.2.0"

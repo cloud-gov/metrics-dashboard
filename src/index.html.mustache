@@ -1,248 +1,317 @@
-<html>
-    <head>
-        <!-- Basic Page Needs
-        ================================================== -->
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="robots" content="index,follow">
-        <!-- Mobile Specific Metas
-        ================================================== -->
-        <meta name="HandheldFriendly" content="True">
-        <meta name="MobileOptimized" content="320">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- Title and meta description
-        ================================================== -->
-        <title>cloud.gov - Metrics dashboard</title>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="robots" content="index,follow" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <link href="assets/css/styles.css" type="text/css" rel="stylesheet" />
-    </head>
-    <body>
-        <a class="usa-skipnav" href="#main-content">Skip to main content</a>
-        <section
-            class="usa-banner"
-            aria-label="Official website of the United States government"
-        >
-            <div class="usa-accordion">
-            <header class="usa-banner__header">
-                <div class="usa-banner__inner">
-                <div class="grid-col-auto">
-                    <img
-                    aria-hidden="true"
-                    class="usa-banner__header-flag"
-                    src="assets/img/us_flag_small.png"
-                    alt=""
-                    />
-                </div>
-                <div class="grid-col-fill tablet:grid-col-auto" aria-hidden="true">
-                    <p class="usa-banner__header-text">
-                    An official website of the United States government
-                    </p>
-                    <p class="usa-banner__header-action">Here’s how you know</p>
-                </div>
-                <button
-                    type="button"
-                    class="usa-accordion__button usa-banner__button"
-                    aria-expanded="false"
-                    aria-controls="gov-banner-default"
-                >
-                    <span class="usa-banner__button-text">Here’s how you know</span>
-                </button>
-                </div>
-            </header>
-            <div
-                class="usa-banner__content usa-accordion__content"
-                id="gov-banner-default"
+    <title>Cloud.gov – Metrics dashboard</title>
+
+    <!-- USWDS init should load early -->
+    <script
+      crossorigin="anonymous"
+      type="text/javascript"
+      src="assets/js/uswds-init.min.js"
+    ></script>
+
+    <link href="assets/css/styles.css" type="text/css" rel="stylesheet" />
+  </head>
+
+  <body class="cg-dashboard">
+    <a class="usa-skipnav" href="#main-content">Skip to main content</a>
+
+    <section
+      class="usa-banner"
+      aria-label="Official website of the United States government"
+    >
+      <div class="usa-accordion">
+        <header class="usa-banner__header">
+          <div class="usa-banner__inner">
+            <div class="grid-col-auto">
+              <img
+                aria-hidden="true"
+                class="usa-banner__header-flag"
+                src="assets/img/us_flag_small.png"
+                alt=""
+              />
+            </div>
+            <div class="grid-col-fill tablet:grid-col-auto" aria-hidden="true">
+              <p class="usa-banner__header-text">
+                An official website of the United States government
+              </p>
+              <p class="usa-banner__header-action">Here’s how you know</p>
+            </div>
+            <button
+              type="button"
+              class="usa-accordion__button usa-banner__button"
+              aria-expanded="false"
+              aria-controls="gov-banner-default"
             >
-                <div class="grid-row grid-gap-lg">
-                <div class="usa-banner__guidance tablet:grid-col-6">
-                    <img
-                    class="usa-banner__icon usa-media-block__img"
-                    src="assets/img/icon-dot-gov.svg"
-                    role="img"
-                    alt=""
-                    aria-hidden="true"
-                    />
-                    <div class="usa-media-block__body">
-                    <p>
-                        <strong>Official websites use .gov</strong><br />A
-                        <strong>.gov</strong> website belongs to an official government
-                        organization in the United States.
-                    </p>
-                    </div>
-                </div>
-                <div class="usa-banner__guidance tablet:grid-col-6">
-                    <img
-                    class="usa-banner__icon usa-media-block__img"
-                    src="assets/img/icon-https.svg"
-                    role="img"
-                    alt=""
-                    aria-hidden="true"
-                    />
-                    <div class="usa-media-block__body">
-                    <p>
-                        <strong>Secure .gov websites use HTTPS</strong><br />A
-                        <strong>lock</strong> (
-                        <span class="icon-lock"
-                        ><svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="52"
-                            height="64"
-                            viewBox="0 0 52 64"
-                            class="usa-banner__lock-image"
-                            role="img"
-                            aria-labelledby="banner-lock-description"
-                            focusable="false"
-                        >
-                            <title id="banner-lock-title">Lock</title>
-                            <desc id="banner-lock-description">
-                            Locked padlock icon
-                            </desc>
-                            <path
-                            fill="#000000"
-                            fill-rule="evenodd"
-                            d="M26 0c10.493 0 19 8.507 19 19v9h3a4 4 0 0 1 4 4v28a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V32a4 4 0 0 1 4-4h3v-9C7 8.507 15.507 0 26 0zm0 8c-5.979 0-10.843 4.77-10.996 10.712L15 19v9h22v-9c0-6.075-4.925-11-11-11z"
-                            />
-                        </svg> </span
-                        >) or <strong>https://</strong> means you’ve safely connected to
-                        the .gov website. Share sensitive information only on official,
-                        secure websites.
-                    </p>
-                    </div>
-                </div>
-                </div>
-            </div>
-            </div>
-        </section>
-        <div class="usa-overlay"></div>
-        <header class="usa-header usa-header--basic">
-            <div class="usa-nav-container">
-                <div class="usa-navbar">
-                    <div class="usa-logo" id="-logo">
-                    <em class="usa-logo__text"
-                        ><a href="/" title="<Project title>">
-                            <img alt="cloud.gov" class="width-card-lg" crossorigin="anonymous" src="assets/img/cloud-gov-logo.svg">
-                        </a></em
-                    >
-                    </div>
-                </div>
-            </div>
+              <span class="usa-banner__button-text">Here’s how you know</span>
+            </button>
+          </div>
         </header>
-        <main id="main-content">
-            <section class="usa-graphic-list usa-section">
-                <div class="grid-container">
-                    <div class="impact-summary__header">
-                        <h1>Customers</h1>
-                    </div>
-                    <div class="usa-graphic-list__row grid-row grid-gap">
-                        <div class="usa-media-block cloud-summary-block tablet:grid-col">
-                            <div class="cloud-summary-block__number">{{ agencies_with_agreement }}</div>
-                            <div class="usa-media-block__body cloud-summary-block__body">
-                                <p>
-                                    agencies with an agreement
-                                </p>
-                            </div>
-                        </div>
-                        <div class="usa-media-block cloud-summary-block tablet:grid-col">
-                            <div class="cloud-summary-block__number">{{ total_sandbox_orgs }}</div>
-                            <div class="usa-media-block__body cloud-summary-block__body">
-                                <p>
-                                    sandbox organizations
-                                </p>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="impact-summary__header">
-                        <h1>Domains</h1>
-                    </div>
-                    <div class="usa-graphic-list__row grid-row grid-gap">
-                        <div class="usa-media-block cloud-summary-block tablet:grid-col">
-                            <div class="cloud-summary-block__number">{{ total_domain_instances }}</div>
-                            <div class="usa-media-block__body cloud-summary-block__body">
-                                <p>
-                                    total domains
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="impact-summary__header">
-                        <h1>Applications</h1>
-                    </div>
-                    <div class="usa-graphic-list__row grid-row grid-gap">
-                        <div class="usa-media-block cloud-summary-block tablet:grid-col">
-                            <div class="cloud-summary-block__number">{{ total_apps }}</div>
-                            <div class="usa-media-block__body cloud-summary-block__body">
-                                <p>
-                                    deployed applications in production
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="impact-summary__header">
-                        <h1>Users</h1>
-                    </div>
-                    <div class="usa-graphic-list__row grid-row grid-gap">
-                        <div class="usa-media-block cloud-summary-block tablet:grid-col">
-                            <div class="cloud-summary-block__number">{{ total_users }}</div>
-                            <div class="usa-media-block__body cloud-summary-block__body">
-                                <p>
-                                    users
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="impact-summary__header">
-                        <h1>Managed cloud services</h1>
-                    </div>
-                    <div class="usa-graphic-list__row grid-row grid-gap">
-                        <div class="usa-media-block cloud-summary-block tablet:grid-col">
-                            <div class="cloud-summary-block__number">{{ total_database_instances }}</div>
-                            <div class="usa-media-block__body cloud-summary-block__body">
-                                <p>
-                                    databases
-                                </p>
-                            </div>
-                        </div>
-                        <div class="usa-media-block cloud-summary-block tablet:grid-col">
-                            <div class="cloud-summary-block__number">{{ total_s3_instances }}</div>
-                            <div class="usa-media-block__body cloud-summary-block__body">
-                                <p>
-                                    S3 buckets
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="usa-graphic-list__row grid-row grid-gap">
-                        <div class="usa-media-block cloud-summary-block tablet:grid-col">
-                            <div class="cloud-summary-block__number">{{ total_es_instances }}</div>
-                            <div class="usa-media-block__body cloud-summary-block__body">
-                                <p>
-                                    Elasticsearch instances
-                                </p>
-                            </div>
-                        </div>
-                        <div class="usa-media-block cloud-summary-block tablet:grid-col">
-                            <div class="cloud-summary-block__number">{{ total_redis_instances }}</div>
-                            <div class="usa-media-block__body cloud-summary-block__body">
-                                <p>
-                                    Redis instances
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </main>
-        <footer class="usa-footer">
-            <div class="grid-container usa-footer__return-to-top">
-            <a href="#">Return to top</a>
+        <!-- IMPORTANT: hidden makes it collapsed by default -->
+        <div
+          class="usa-banner__content usa-accordion__content"
+          id="gov-banner-default"
+          hidden
+        >
+          <div class="grid-row grid-gap-lg">
+            <div class="usa-banner__guidance tablet:grid-col-6">
+              <img
+                class="usa-banner__icon usa-media-block__img"
+                src="assets/img/icon-dot-gov.svg"
+                alt=""
+                aria-hidden="true"
+              />
+              <div class="usa-media-block__body">
+                <p>
+                  <strong>Official websites use .gov</strong><br />
+                  A <strong>.gov</strong> website belongs to an official
+                  government organization in the United States.
+                </p>
+              </div>
             </div>
-        </footer>
 
-        <script crossorigin="anonymous" type="text/javascript" src="assets/js/uswds-init.min.js"></script>
-        <script crossorigin="anonymous" type="text/javascript" src="assets/js/uswds.min.js"></script>
-    </body>
+            <div class="usa-banner__guidance tablet:grid-col-6">
+              <img
+                class="usa-banner__icon usa-media-block__img"
+                src="assets/img/icon-https.svg"
+                alt=""
+                aria-hidden="true"
+              />
+              <div class="usa-media-block__body">
+                <p>
+                  <strong>Secure .gov websites use HTTPS</strong><br />
+                  A <strong>lock</strong> (
+                  <span class="icon-lock"
+                    ><svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="52"
+                      height="64"
+                      viewBox="0 0 52 64"
+                      class="usa-banner__lock-image"
+                      role="img"
+                      aria-labelledby="banner-lock-description"
+                      focusable="false"
+                    >
+                      <title id="banner-lock-title">Lock</title>
+                      <desc id="banner-lock-description">Locked padlock</desc>
+                      <path
+                        fill="#000000"
+                        fill-rule="evenodd"
+                        d="M26 0c10.493 0 19 8.507 19 19v9h3a4 4 0 0 1 4 4v28a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V32a4 4 0 0 1 4-4h3v-9C7 8.507 15.507 0 26 0zm0 8c-5.979 0-10.843 4.77-10.996 10.712L15 19v9h22v-9c0-6.075-4.925-11-11-11z"
+                      />
+                    </svg> </span
+                  >)
+                  or <strong>https://</strong> means you’ve safely connected to
+                  the .gov website. Share sensitive information only on
+                  official, secure websites.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="usa-overlay"></div>
+
+    <header class="usa-header usa-header--basic">
+      <div class="usa-nav-container">
+        <div class="usa-navbar">
+          <div class="usa-logo">
+            <em class="usa-logo__text">
+              <a href="https://cloud.gov" title="Cloud.gov metrics dashboard">
+                <img
+                  alt="Cloud.gov"
+                  class="width-card-lg"
+                  src="assets/img/cloud-gov-logo.svg"
+                />
+              </a>
+            </em>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <section class="cg-hero">
+        <div class="grid-container">
+          <h1 class="cg-hero__title">Faster insight into platform usage.</h1>
+          <p class="cg-hero__lede">
+            A simple, at-a-glance dashboard of production counts for customers,
+            domains, apps, users, and managed services.
+          </p>
+
+          <p class="cg-dashboard__updated">
+            Last updated:
+            <time datetime="{{ last_updated_utc }}">{{ last_updated_human }}</time>
+          </p>
+        </div>
+      </section>
+
+
+      <section class="usa-section">
+        <div class="grid-container">
+          <section aria-labelledby="customers-heading">
+            <h2 id="customers-heading" class="cg-section-title">Customers</h2>
+            <ul class="usa-card-group">
+              <li class="usa-card tablet:grid-col-6">
+                <div class="usa-card__container">
+                  <header class="usa-card__header">
+                    <p class="cg-metric__label margin-0">
+                      Agencies with an agreement
+                    </p>
+                  </header>
+                  <div class="usa-card__body">
+                    <p class="cg-metric__value margin-0">
+                      {{ agencies_with_agreement }}
+                    </p>
+                  </div>
+                </div>
+              </li>
+
+              <li class="usa-card tablet:grid-col-6">
+                <div class="usa-card__container">
+                  <header class="usa-card__header">
+                    <p class="cg-metric__label margin-0">Sandbox organizations</p>
+                  </header>
+                  <div class="usa-card__body">
+                    <p class="cg-metric__value margin-0">
+                      {{ total_sandbox_orgs }}
+                    </p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </section>
+
+          <!-- Domains -->
+          <section aria-labelledby="domains-heading">
+            <h2 id="domains-heading" class="cg-section-title">Domains</h2>
+            <ul class="usa-card-group">
+              <li class="usa-card tablet:grid-col-6">
+                <div class="usa-card__container">
+                  <header class="usa-card__header">
+                    <p class="cg-metric__label margin-0">Total domains</p>
+                  </header>
+                  <div class="usa-card__body">
+                    <p class="cg-metric__value margin-0">{{ total_domain_instances }}</p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </section>
+
+          <!-- Applications -->
+          <section aria-labelledby="apps-heading">
+            <h2 id="apps-heading" class="cg-section-title">Applications</h2>
+            <ul class="usa-card-group">
+              <li class="usa-card tablet:grid-col-6">
+                <div class="usa-card__container">
+                  <header class="usa-card__header">
+                    <p class="cg-metric__label margin-0">
+                      Deployed applications in production
+                    </p>
+                  </header>
+                  <div class="usa-card__body">
+                    <p class="cg-metric__value margin-0">{{ total_apps }}</p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </section>
+
+          <!-- Users -->
+          <section aria-labelledby="users-heading">
+            <h2 id="users-heading" class="cg-section-title">Users</h2>
+            <ul class="usa-card-group">
+              <li class="usa-card tablet:grid-col-6">
+                <div class="usa-card__container">
+                  <header class="usa-card__header">
+                    <p class="cg-metric__label margin-0">Users</p>
+                  </header>
+                  <div class="usa-card__body">
+                    <p class="cg-metric__value margin-0">{{ total_users }}</p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </section>
+
+          <!-- Managed cloud services -->
+          <section aria-labelledby="services-heading">
+            <h2 id="services-heading" class="cg-section-title">
+              Managed cloud services
+            </h2>
+
+            <ul class="usa-card-group">
+              <li class="usa-card tablet:grid-col-6">
+                <div class="usa-card__container">
+                  <header class="usa-card__header">
+                    <p class="cg-metric__label margin-0">Databases</p>
+                  </header>
+                  <div class="usa-card__body">
+                    <p class="cg-metric__value margin-0">
+                      {{ total_database_instances }}
+                    </p>
+                  </div>
+                </div>
+              </li>
+
+              <li class="usa-card tablet:grid-col-6">
+                <div class="usa-card__container">
+                  <header class="usa-card__header">
+                    <p class="cg-metric__label margin-0">S3 buckets</p>
+                  </header>
+                  <div class="usa-card__body">
+                    <p class="cg-metric__value margin-0">{{ total_s3_instances }}</p>
+                  </div>
+                </div>
+              </li>
+
+              <li class="usa-card tablet:grid-col-6">
+                <div class="usa-card__container">
+                  <header class="usa-card__header">
+                    <p class="cg-metric__label margin-0">Elasticsearch instances</p>
+                  </header>
+                  <div class="usa-card__body">
+                    <p class="cg-metric__value margin-0">{{ total_es_instances }}</p>
+                  </div>
+                </div>
+              </li>
+
+              <li class="usa-card tablet:grid-col-6">
+                <div class="usa-card__container">
+                  <header class="usa-card__header">
+                    <p class="cg-metric__label margin-0">Redis instances</p>
+                  </header>
+                  <div class="usa-card__body">
+                    <p class="cg-metric__value margin-0">{{ total_redis_instances }}</p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </section>
+        </div>
+      </section>
+    </main>
+
+  <footer class="usa-footer">
+      <div class="grid-container usa-footer__return-to-top">
+        <a href="#">Return to top</a>
+      </div>
+    </footer>
+
+    <!-- USWDS behavior JS -->
+    <script
+      crossorigin="anonymous"
+      type="text/javascript"
+      src="assets/js/uswds.min.js"
+    ></script>
+  </body>
 </html>

@@ -1,12 +1,15 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -euo pipefail
 
-npm install
+echo "==> Installing dependencies (deterministic)"
+npm ci
 
-# copy data generated in previous step into place
-cp ../data/data.json src
+echo "==> Preparing data.json"
+# Data is produced by the previous Concourse task into ../data
+# Keep this explicit for now; we’ll clean the output path next.
+cp ../data/data.json src/data.json
 
-# compile CSS
-npx gulp compile
+echo "==> Building dashboard (CSS + HTML)"
+npm run build
 
-# generate HTML
-npm run generate-html
+echo "==> Build complete"

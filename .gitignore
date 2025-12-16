@@ -1,6 +1,18 @@
-node_modules
-src/assets/css
+# Node / JS
+node_modules/
+
+# Generated frontend assets
+src/assets/css/
 src/index.html
-.DS_Store
 src/data*.json
-venv
+
+# OS noise
+.DS_Store
+
+# Python virtual environments (scripts may use python locally)
+venv/
+.venv/
+
+# Editor / tooling
+*.log
+*.tmp

@@ -11,11 +11,12 @@ image_resource:
     tag: latest
 
 inputs:
-- name: src
+  - name: src
 
 outputs:
-- name: data
-  path: src/src
+  - name: data
+    path: data
 
 run:
-  path: src/scripts/generate-data.sh
+  dir: src
+  path: scripts/generate-data.sh

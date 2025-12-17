@@ -37,4 +37,4 @@ jq -n -r \
   --argjson total_redis_instances "$TOTAL_REDIS_INSTANCES" \
   --argjson total_s3_instances "$TOTAL_S3_INSTANCES" \
   --argjson agencies_with_agreement "$agencies_with_agreement" \
-  '$ARGS.named' > "$SCRIPT_DIR/../data/data.json"
+  '$ARGS.named' > "$SCRIPT_DIR/../../data/data.json"

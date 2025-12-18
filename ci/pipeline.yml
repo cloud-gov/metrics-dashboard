@@ -99,6 +99,7 @@ jobs:
       CF_API_PASSWORD: ((prod-cf-broker-user.password))
       CF_ORG: ((dashboard-organization))
       CF_SPACE: ((dashboard-space))
+      WAF_WEB_ACL_NAME: ((prod-waf-web-acl-name))
   - task: generate-html
     file: src/ci/generate-html.yml
   - put: cf-prod

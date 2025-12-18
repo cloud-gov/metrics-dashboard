@@ -11,8 +11,9 @@ fi
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
-ALLOWED_REQS=$("$SCRIPT_DIR"/get-waf-requests-count.sh allowed)
-BLOCKED_REQS=$("$SCRIPT_DIR"/get-waf-requests-count.sh blocked)
+ALLOWED_REQS=$("$SCRIPT_DIR"/get-cloudwatch-metrics-sum.sh AWS/WAFV2 AllowedRequests "Name=Region,Value=$AWS_DEFAULT_REGION Name=WebACL,Value=$WAF_WEB_ACL_NAME Name=Rule,Value=ALL")
+BLOCKED_REQS=$("$SCRIPT_DIR"/get-cloudwatch-metrics-sum.sh AWS/WAFV2 BlockedRequests "Name=Region,Value=$AWS_DEFAULT_REGION Name=WebACL,Value=$WAF_WEB_ACL_NAME Name=Rule,Value=ALL")
+SES_EMAILS_SENT=$("$SCRIPT_DIR"/get-cloudwatch-metrics-sum.sh AWS/SES Send)
 TOTAL_SANDBOXES=$("$SCRIPT_DIR"/get-sandboxes-count.sh)
 TOTAL_USERS=$("$SCRIPT_DIR"/get-users-count.sh)
 TOTAL_APPS=$("$SCRIPT_DIR"/get-apps-count.sh)
@@ -24,6 +25,11 @@ TOTAL_REDIS_INSTANCES=$("$SCRIPT_DIR"/get-service-offering-instance-count.sh aws
 # Platform and Pages S3 service instances
 TOTAL_S3_INSTANCES=$("$SCRIPT_DIR"/get-service-offering-instance-count.sh s3,federalist-s3)
 agencies_with_agreement=$("$SCRIPT_DIR"/get-agency-customers-count.sh)
+
+OUTPUT_DATA_FILE="$1"
+if [[ -z $OUTPUT_DATA_FILE ]]; then
+  OUTPUT_DATA_FILE="$SCRIPT_DIR/../src/data.json"
+fi
 
 jq -n -r \
   --argjson allowed_reqs "$ALLOWED_REQS" \
@@ -37,4 +43,5 @@ jq -n -r \
   --argjson total_redis_instances "$TOTAL_REDIS_INSTANCES" \
   --argjson total_s3_instances "$TOTAL_S3_INSTANCES" \
   --argjson agencies_with_agreement "$agencies_with_agreement" \
-  '$ARGS.named' > "$SCRIPT_DIR/../../data/data.json"
+  --argjson ses_emails_sent "$SES_EMAILS_SENT" \
+  '$ARGS.named' > "$OUTPUT_DATA_FILE"

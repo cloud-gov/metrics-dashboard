@@ -19,4 +19,4 @@ outputs:
 
 run:
   dir: src
-  path: scripts/generate-data.sh
+  path: scripts/generate-data.sh ../data/data.json

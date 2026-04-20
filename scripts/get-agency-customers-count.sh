@@ -1,10 +1,6 @@
 #!/bin/bash
 
-cf orgs \
-  | tail -n +4 \
-  | grep -v 'sandbox\|arsalan-haider\|mark-boyd\|3pao\|test-\|system\|david-anderson\|cf\|cloud-gov\|tech-talk' \
-  | cut -d - -f 1 \
-  | sort \
-  | uniq -c \
-  | wc -l \
-  | jq -r
+CUSTOMER_ORG_FILTER=$(echo "org-type=customer" | jq -Rr @uri)
+
+# NOTE: does not handle paging
+cf curl "/v3/organizations?per_page=5000&label_selector=$CUSTOMER_ORG_FILTER" | jq -r '.resources[].name' | sort | uniq | wc -l

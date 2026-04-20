@@ -24,7 +24,7 @@ TOTAL_ES_INSTANCES=$("$SCRIPT_DIR"/get-service-offering-instance-count.sh aws-el
 TOTAL_REDIS_INSTANCES=$("$SCRIPT_DIR"/get-service-offering-instance-count.sh aws-elasticache-redis)
 # Platform and Pages S3 service instances
 TOTAL_S3_INSTANCES=$("$SCRIPT_DIR"/get-service-offering-instance-count.sh s3,federalist-s3)
-agencies_with_agreement=$("$SCRIPT_DIR"/get-agency-customers-count.sh)
+total_customer_orgs=$("$SCRIPT_DIR"/get-agency-customers-count.sh)
 
 OUTPUT_DATA_FILE="$1"
 if [[ -z $OUTPUT_DATA_FILE ]]; then
@@ -42,6 +42,6 @@ jq -n -r \
   --argjson total_es_instances "$TOTAL_ES_INSTANCES" \
   --argjson total_redis_instances "$TOTAL_REDIS_INSTANCES" \
   --argjson total_s3_instances "$TOTAL_S3_INSTANCES" \
-  --argjson agencies_with_agreement "$agencies_with_agreement" \
+  --argjson total_customer_orgs "$total_customer_orgs" \
   --argjson ses_emails_sent "$SES_EMAILS_SENT" \
   '$ARGS.named' > "$OUTPUT_DATA_FILE"

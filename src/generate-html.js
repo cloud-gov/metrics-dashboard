@@ -71,7 +71,7 @@ function main() {
   // Mustache renders missing keys as empty strings; that can hide data issues.
   // We do a small sanity check on expected keys to catch broken pipelines early.
   const requiredKeys = [
-    "agencies_with_agreement",
+    "total_customer_orgs",
     "total_sandbox_orgs",
     "total_domain_instances",
     "total_apps",
@@ -86,7 +86,7 @@ function main() {
   if (missing.length > 0) {
     throw new Error(
       `data.json is missing required keys:\n- ${missing.join("\n- ")}\n\n` +
-        "This usually means the data generation step failed or wrote unexpected output."
+      "This usually means the data generation step failed or wrote unexpected output."
     );
   }
 
